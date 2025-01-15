@@ -20,7 +20,7 @@ interface UserData {
         <p>Authenticating...</p>
       </div>
 
-      <div *ngIf="isLoggedIn">
+      <div *ngIf="isLoggedIn && userDetails">
         <h1>User logged in successfully!</h1>
         <button class="btn btn-secondary" (click)="logout()">
           <span class="btn-text">Logout</span>
