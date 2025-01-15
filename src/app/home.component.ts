@@ -23,10 +23,12 @@ interface UserData {
         <h1 *ngIf="isLoggedIn">User logged in successfully!</h1>
         <h1 *ngIf="!isLoggedIn">Sign in failed!</h1>
         <div *ngIf="isLoggedIn">
+          <button class="btn btn-secondary" (click)="logout()">
+            <span class="btn-text">Logout</span>
+          </button>
           <h2>User Details:</h2>
           <pre>{{ userDetails | json }}</pre>
         </div>
-        <button (click)="logout()">Logout</button>
       </ng-container>
     </div>
   `,
@@ -68,6 +70,32 @@ interface UserData {
         100% {
           transform: rotate(360deg);
         }
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 4px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .btn-secondary {
+        background-color: #757575;
+        color: white;
+      }
+      .btn-secondary:hover {
+        background-color: #616161;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .btn-text {
+        font-weight: 500;
+      }
+      .btn:active {
+        transform: translateY(1px);
       }
     `,
   ],
