@@ -20,13 +20,15 @@ interface UserData {
         <p>Authenticating...</p>
       </div>
       <ng-container *ngIf="!isLoading">
-        <div *ngIf="isLoggedIn || userDetails?.['email']">
+        <div *ngIf="isLoggedIn || userDetails?.['email'] || userDetails?.['cognito:username']">
           <h1>User logged in successfully!</h1>
           <button class="btn btn-secondary" (click)="logout()">
             <span class="btn-text">Logout</span>
           </button>
           <h2>User Details:</h2>
-          <pre>{{ userDetails | json }}</pre>
+          <div class="user-details">
+            <pre>{{ userDetails | json }}</pre>
+          </div>
         </div>
         <div *ngIf="!isLoggedIn">
           <!-- <h1>Sign in failed!</h1> -->
@@ -98,6 +100,19 @@ interface UserData {
       }
       .btn:active {
         transform: translateY(1px);
+      }
+      .user-details {
+        background: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 600px;
+        margin: 20px auto;
+        overflow-x: auto;
+      }
+      .user-details pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin: 0;
       }
     `,
   ],
