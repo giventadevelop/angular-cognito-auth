@@ -14,24 +14,56 @@ interface UserData {
 @Component({
   selector: 'app-home',
   template: `
-    <h1 *ngIf="isLoggedIn">User logged in successfully!</h1>
-    <h1 *ngIf="!isLoggedIn">Sign in failed!</h1>
-    <div *ngIf="isLoading" class="loading-message">
-      <p>Authenticating...</p>
+    <div class="container">
+      <div *ngIf="isLoading" class="loading-message">
+        <div class="spinner"></div>
+        <p>Authenticating...</p>
+      </div>
+      <ng-container *ngIf="!isLoading">
+        <h1 *ngIf="isLoggedIn">User logged in successfully!</h1>
+        <h1 *ngIf="!isLoggedIn">Sign in failed!</h1>
+        <div *ngIf="isLoggedIn">
+          <h2>User Details:</h2>
+          <pre>{{ userDetails | json }}</pre>
+        </div>
+        <button (click)="logout()">Logout</button>
+      </ng-container>
     </div>
-    <div *ngIf="isLoggedIn">
-      <h2>User Details:</h2>
-      <pre>{{ userDetails | json }}</pre>
-    </div>
-    <button (click)="logout()">Logout</button>
   `,
   styles: [
     `
+      .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       .loading-message {
-        padding: 10px;
-        background-color: #e3f2fd;
-        border-radius: 4px;
-        margin: 10px 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(227, 242, 253, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        font-size: 24px;
+      }
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
     `,
   ],
@@ -111,12 +143,19 @@ export class HomeComponent implements OnInit {
       sessionStorage.setItem('authCode', params['code']);
       sessionStorage.setItem('authState', params['state']);
 
-      this.oidcSecurityService
-        .checkAuth()
-        .pipe(
-          take(1),
-          finalize(() => (this.isLoading = false))
-        )
+      // Add initial delay before checking auth
+      setTimeout(() => {
+        this.oidcSecurityService
+          .checkAuth()
+          .pipe(
+            take(1),
+            finalize(() => {
+              // Add additional delay before hiding loading indicator
+              setTimeout(() => {
+                this.isLoading = false;
+              }, 2000);
+            })
+          )
         .subscribe({
           next: ({ isAuthenticated }) => {
             console.log('Auth callback status:', isAuthenticated);
