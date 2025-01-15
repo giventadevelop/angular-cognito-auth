@@ -1,6 +1,7 @@
 .auth-buttons {
   display: flex;
   justify-content: center;
+  gap: 16px;
   margin: 20px 0;
   padding: 0 16px;
 }
@@ -24,6 +25,16 @@
 
 .btn-primary:hover {
   background-color: #1565c0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  background-color: #757575;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #616161;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
