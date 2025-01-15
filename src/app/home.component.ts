@@ -156,29 +156,30 @@ export class HomeComponent implements OnInit {
               }, 2000);
             })
           )
-        .subscribe({
-          next: ({ isAuthenticated }) => {
-            console.log('Auth callback status:', isAuthenticated);
-            if (isAuthenticated) {
-              this.isLoggedIn = true;
-              this.router.navigate(['/']);
-            } else {
-              console.log(
-                'Authentication failed, attempting to login again...'
-              );
+          .subscribe({
+            next: ({ isAuthenticated }) => {
+              console.log('Auth callback status:', isAuthenticated);
+              if (isAuthenticated) {
+                this.isLoggedIn = true;
+                this.router.navigate(['/']);
+              } else {
+                console.log(
+                  'Authentication failed, attempting to login again...'
+                );
+                setTimeout(() => {
+                  this.oidcSecurityService.authorize();
+                }, 1000);
+              }
+            },
+            error: (error) => {
+              console.error('Auth callback error:', error);
+              this.authError = 'Authentication failed';
               setTimeout(() => {
                 this.oidcSecurityService.authorize();
               }, 1000);
-            }
-          },
-          error: (error) => {
-            console.error('Auth callback error:', error);
-            this.authError = 'Authentication failed';
-            setTimeout(() => {
-              this.oidcSecurityService.authorize();
-            }, 1000);
-          },
-        });
+            },
+          });
+      }, 1000); // Initial delay of 1 second
     } catch (error) {
       this.isLoading = false;
       console.error('Auth callback processing error:', error);
