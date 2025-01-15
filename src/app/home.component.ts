@@ -19,18 +19,19 @@ interface UserData {
         <div class="spinner"></div>
         <p>Authenticating...</p>
       </div>
-
-      <div *ngIf="isLoggedIn && userDetails">
-        <h1>User logged in successfully!</h1>
-        <button class="btn btn-secondary" (click)="logout()">
-          <span class="btn-text">Logout</span>
-        </button>
-        <h2>User Details:</h2>
-        <pre>{{ userDetails | json }}</pre>
-      </div>
-      <!-- <div *ngIf="!isLoggedIn">
-        <h1>Sign in failed!</h1>
-      </div> -->
+      <ng-container *ngIf="!isLoading">
+        <div *ngIf="isLoggedIn">
+          <h1>User logged in successfully!</h1>
+          <button class="btn btn-secondary" (click)="logout()">
+            <span class="btn-text">Logout</span>
+          </button>
+          <h2>User Details:</h2>
+          <pre>{{ userDetails | json }}</pre>
+        </div>
+        <div *ngIf="!isLoggedIn">
+          <!-- <h1>Sign in failed!</h1> -->
+        </div>
+      </ng-container>
     </div>
   `,
   styles: [
@@ -186,7 +187,7 @@ export class HomeComponent implements OnInit {
               // Add additional delay before hiding loading indicator
               setTimeout(() => {
                 this.isLoading = false;
-              }, 1000);
+              }, 2000);
             })
           )
           .subscribe({
