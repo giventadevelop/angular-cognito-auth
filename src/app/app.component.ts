@@ -13,10 +13,4 @@ export class AppComponent {
   login() {
     this.authService.authorize();
   }
-
-  logout() {
-    this.authService.logoff().subscribe((result) => {
-      console.log('logout success');
-    });
-  }
 }
