@@ -20,14 +20,16 @@ interface UserData {
         <p>Authenticating...</p>
       </div>
       <ng-container *ngIf="!isLoading">
-        <h1 *ngIf="isLoggedIn">User logged in successfully!</h1>
-        <h1 *ngIf="!isLoggedIn">Sign in failed!</h1>
         <div *ngIf="isLoggedIn">
+          <h1>User logged in successfully!</h1>
           <button class="btn btn-secondary" (click)="logout()">
             <span class="btn-text">Logout</span>
           </button>
           <h2>User Details:</h2>
           <pre>{{ userDetails | json }}</pre>
+        </div>
+        <div *ngIf="!isLoggedIn">
+          <h1>Sign in failed!</h1>
         </div>
       </ng-container>
     </div>
