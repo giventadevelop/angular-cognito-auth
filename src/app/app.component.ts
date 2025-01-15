@@ -1,10 +1,16 @@
+// src/app/app.component.ts
+
 import { Component } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-cognito-auth';
+  constructor(private authService: OidcSecurityService) {}
+
+  login() {
+    this.authService.authorize();
+  }
 }
