@@ -10,11 +10,12 @@ import { HomeComponent } from './home.component';
 import {AuthCustomModule} from "./auth.module";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent,AuthCustomModule],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AuthCustomModule
   ],
   providers: [],
   bootstrap: [AppComponent],
