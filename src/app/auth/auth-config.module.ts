@@ -6,7 +6,7 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
   imports: [
     AuthModule.forRoot({
       config: {
-        authority: 'https://us-east-2fx0foj6hs.auth.us-east-2.amazoncognito.com/',
+        authority: 'https://us-east-2fx0foj6hs.auth.us-east-2.amazoncognito.com',
         redirectUrl: window.location.origin,
         clientId: '5td15o52te3e32nir868jih1j7',
         scope: 'email openid phone profile offline_access',
