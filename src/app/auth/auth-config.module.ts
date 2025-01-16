@@ -6,7 +6,7 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
   imports: [
     AuthModule.forRoot({
       config: {
-        authority: 'https://us-east-2fx0foj6hs.auth.us-east-2.amazoncognito.com',
+        authority: 'https://cognito-idp.us-east-2.amazonaws.com/us-east-2fx0foj6hs',
         redirectUrl: window.location.origin,
         clientId: '5td15o52te3e32nir868jih1j7',
         scope: 'email openid phone profile offline_access',
@@ -15,9 +15,10 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
         useRefreshToken: true,
         ignoreNonceAfterRefresh: true,
         maxIdTokenIatOffsetAllowedInSeconds: 600,
-        issValidationOff: true,
-        autoUserInfo: true,
+        issValidationOff: false,
+        autoUserInfo: false,
         secureRoutes: [],
+        disablePkce: false,
         customParamsAuthRequest: {
           prompt: 'login'
         },
