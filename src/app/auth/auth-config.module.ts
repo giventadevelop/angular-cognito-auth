@@ -1,7 +1,7 @@
 // src/app/auth/auth.module.ts
+
 import { NgModule } from '@angular/core';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
-
 @NgModule({
   imports: [
     AuthModule.forRoot({
@@ -13,7 +13,7 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
         responseType: 'code',
         silentRenew: true,
         useRefreshToken: true,
-        ignoreNonceAfterRefresh: true, 
+        ignoreNonceAfterRefresh: true,
         maxIdTokenIatOffsetAllowedInSeconds: 600,
         issValidationOff: true, // Set to true for Cognito
         autoUserInfo: true,
