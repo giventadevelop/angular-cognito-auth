@@ -1,6 +1,6 @@
 // src/app/auth/auth.module.ts
 import { NgModule } from '@angular/core';
-import { AuthModule } from 'angular-auth-oidc-client';
+import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 
 @NgModule({
   imports: [
@@ -26,7 +26,7 @@ import { AuthModule } from 'angular-auth-oidc-client';
         unauthorizedRoute: '/unauthorized',
         triggerAuthorizationResultEvent: true,
         historyCleanupOff: true,
-        logLevel: 'debug'
+        logLevel: LogLevel.Debug
       },
     }),
   ],
