@@ -6,24 +6,15 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
   imports: [
     AuthModule.forRoot({
       config: {
-        authority: 'https://my-app.auth.us-east-2.amazoncognito.com',
-        authorizationEndpoint: 'https://my-app.auth.us-east-2.amazoncognito.com/oauth2/authorize',
-        tokenEndpoint: 'https://my-app.auth.us-east-2.amazoncognito.com/oauth2/token',
+        authority: 'https://cognito-idp.us-east-2.amazonaws.com/us-east-2_YOUR_USER_POOL_ID',
         redirectUrl: window.location.origin,
         clientId: 'abc123abc123abc123',
-        scope: 'email openid phone profile offline_access',
+        scope: 'openid profile email phone',
         responseType: 'code',
         silentRenew: true,
         useRefreshToken: true,
         ignoreNonceAfterRefresh: true,
         maxIdTokenIatOffsetAllowedInSeconds: 600,
-        issValidationOff: false,
-        autoUserInfo: false,
-        secureRoutes: [],
-        disablePkce: false,
-        customParamsAuthRequest: {
-          prompt: 'login'
-        },
         postLogoutRedirectUri: window.location.origin,
         forbiddenRoute: '/forbidden',
         unauthorizedRoute: '/unauthorized',
